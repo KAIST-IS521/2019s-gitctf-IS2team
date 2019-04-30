@@ -1,0 +1,31 @@
+[{
+  "model": "is521_ca.user",
+  "pk": "eliz",
+  "fields": {
+    "lastname": "Elizabeth",
+    "firstname": "Welter",
+    "email": "eliz@security.com",
+    "passwd": "1a9bb892d2beec91beaf415025f5e109bad6081f"
+  }
+},
+{
+  "model": "is521_ca.user",
+  "pk": "seger",
+  "fields": {
+    "lastname": "Seger",
+    "firstname": "George",
+    "email": "seger@kaist-is561.com",
+    "passwd": "9b08b0357d2f1d34ecf42dfd9bc5001733fca132"
+  }
+},
+{
+  "model": "is521_ca.user",
+  "pk": "kung",
+  "fields": {
+    "lastname": "Kung",
+    "firstname": "Qiang",
+    "email": "kung@hello.kr",
+    "passwd": "647f8e8c95e4cfc7254cf3dc7bb4f79b97d12712"
+  }
+}
+]
