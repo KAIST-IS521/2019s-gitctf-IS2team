@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/2.1/ref/settings/
 """
 
 import os
+from Crypto.PublicKey import RSA
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -74,35 +75,14 @@ TEMPLATES = [
 """
 WSGI_APPLICATION = 'is521_ca.wsgi.application'
 
-from Crypto.Math.Primality import test_probable_prime
-from Crypto.Util.number import getPrime
-from Crypto.Math.Numbers import Integer
-from Crypto.PublicKey import RSA
-import os
-
 if not os.path.exists("Keys/privatekey.pri"):
-    q = Integer(getPrime(2048))
-    p = Integer(2) * q - 1
-    while True:
-        p = p - 2
-        if test_probable_prime(p) == 1:
-                break
-    n = p * q
-    lcm = (p - 1).lcm(q - 1)
-    while True:
-        d = Integer(getPrime(128))
-        if (p - 1).gcd(d) == 1 and (q - 1).gcd(d) == 1:
-            break
-    e = d.inverse(lcm)
-    u = p.inverse(q)
-    key = RSA.construct((n, e, d, p, q, u), True)
+    key = RSA.generate(2048)
     f = open('Keys/privatekey.pri', 'wb')
     f.write(key.export_key('PEM', passphrase='mypass'))
     f.close()
     f = open('Keys/publickey.pub', 'wb')
     f.write(key.publickey().export_key('PEM'))
     f.close()
-
 # Database
 # https://docs.djangoproject.com/en/2.1/ref/settings/#databases
 
