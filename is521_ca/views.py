@@ -64,7 +64,7 @@ def upload(request):
         if retcode != 0:
             return HttpResponse("Error while dearmoring...\r\n")
 
-        file_content = default_storage.open(temp_filename(uid)).read()
+        file_content = default_storage.open(dearmored_filename).read()
 
         user = User.objects.filter(uid=uid)[0]
         cert = Certificate(uid=user)
