@@ -156,18 +156,15 @@ def download(request):
 
     cert = user_cert_lists[0]
 
-    json_packing = '{'
-    json_packing += '"serial" : {}, '.format(cert.serial)
-    json_packing += '"uid" : "{}", '.format(target_user.uid)
-    json_packing += '"first_name" : "{}", '.format(target_user.firstname)
-    json_packing += '"last_name" : "{}", '.format(target_user.lastname)
-    json_packing += '"email" : "{}", '.format(target_user.email)
-    json_packing += '"key" : "{}"'.format(cert.key.encode().hex())
-    json_packing += '}'
+    json_obj = {}
+    json_obj['serial'] = cert.serial
+    json_obj['uid'] = target_user.uid
+    json_obj['first_name'] = target_user.firstname
+    json_obj['last_name'] = target_user.lastname
+    json_obj['email'] = target_user.email
+    json_obj['key'] = cert.key.encode().hex()
 
-    # to normalize structure of json cert, load and dump.
-    cert_data = json.loads(json_packing, object_hook=dict)
-    cert_str = json.dumps(cert_data)
+    cert_str = json.dumps(json_obj)
 
     message, s = cert_sign(cert_str)
 
